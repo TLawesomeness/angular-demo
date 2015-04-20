@@ -1,0 +1,71 @@
+doctype html
+html(lang='en' ng-app='alpha')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')  
+    title Angular Demo
+    
+    link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href=isProd ? '/index.min.css' : '/index.css')
+    link(rel='shortcut icon', href='/favicon.ico')
+      
+  body
+    h1#title Angular Demo
+    
+    .container-fluid
+      .row(ng-controller='listfun')
+        .col-xs-12
+          h1 list fun
+          input(type='text', ng-model='numString')
+          button(ng-click='compute()') Compute
+          input(type='number', ng-model='number')
+          button(ng-click='addNumber()') Add Number  
+          .row
+            .col-xs-6
+              h3 Numbers
+              #numbers
+                .number(ng-repeat='num in numbers track by $index', ng-click='removeNumber($index)', style='background-color:{{getBg(num)}};') {{num}}
+            .col-xs-6
+              h3 Stats
+              p {{sum}}
+              p {{product}}
+            
+      .row(ng-controller='rainbow')
+        .col-xs-12
+          h1 Rainbow
+          input(type='color' ng-model='newcolor')
+          button(ng-click='addColor()') Add Color  
+          #colors
+            .color(ng-repeat='color in colors track by $index', 
+                  style='background-color: {{color}};', 
+                  ng-click='removeColor($index)') {{color}} {{z}}
+      
+      .row(ng-controller='calculator')
+        .col-xs-12
+          h1 Calculator
+          input(type='number', ng-model='x')
+          input(type='text', ng-model='op')
+          input(type='number', ng-model='y')
+          button.btn.btn-success.btn-small(ng-click='compute()') =
+          span {{result}}
+          
+      .row(ng-controller='beta')
+        .col-xs-12
+          p The value of x is {{x}}
+          p The value of y is {{y}}
+          p The sum of x and y is {{x + y}}
+      .row(ng-controller='gamma')
+        .col-xs-6
+          h1 GAMMA
+          p The value of x is {{x}}
+        .col-xs-6
+          h1 GAMMA 2
+          p The value of x is {{y}}
+          
+    script(src='/vendor/jquery/dist/jquery.min.js')
+    script(src='/vendor/lodash/lodash.min.js')
+    script(src='/vendor/angular/angular.min.js')
+    script(src='/vendor/bootstrap/dist/js/bootstrap.min.js')  
+    script(src=isProd ? '/index.min.js' : '/index.js')
